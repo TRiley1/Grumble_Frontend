@@ -1,7 +1,7 @@
-import Login from "../components/Login";
+import Login from "../components/login/Login";
 import Register from "../components/Register";
 import React, { useState } from 'react';
-
+import './GrumbleContainer.css';
 
 const GrumbleContainer = () => {
     const [authToken, setAuthToken] = useState('');
@@ -13,8 +13,7 @@ const GrumbleContainer = () => {
 
     return (
         <>
-            <h1>Hello Grumble</h1>
-            <Register />
+            {/* <Register /> */}
             <Login onLogin={onLogin} /> {/* Use 'onLogin' prop here */}
         </>
     );

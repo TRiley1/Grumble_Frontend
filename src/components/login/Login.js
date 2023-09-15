@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Login.css'
 
 const Login = ({ onLogin }) => {
   const [formData, setFormData] = useState({
@@ -56,7 +57,8 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div>
+    <div class = 'login-card'>
+    <h1>GRUMBLE</h1>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
