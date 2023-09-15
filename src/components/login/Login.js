@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Login.css'
+import { useNavigate } from 'react-router-dom';
 
 const Login = ({ onLogin }) => {
   const [formData, setFormData] = useState({
@@ -7,6 +8,8 @@ const Login = ({ onLogin }) => {
     password: '',
   });
   const [error, setError] = useState('');
+
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,8 +44,9 @@ const Login = ({ onLogin }) => {
         const { accessToken } = responseBody;
 
         // Call the onLogin function with the accessToken
-        onLogin(accessToken);
-
+        onLogin(accessToken, formData.username);
+        navigate('/home')
+        
         // You can now use this accessToken in your app's state or context
         console.log('Login successful. access Token:', accessToken);
       } else {
@@ -58,8 +62,7 @@ const Login = ({ onLogin }) => {
 
   return (
     <div class = 'login-card'>
-    <h1>GRUMBLE</h1>
-      <h2>Login</h2>
+    <div class = 'login-card-header'></div>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username:</label>
@@ -88,6 +91,7 @@ const Login = ({ onLogin }) => {
         </div>
         {error && <p className="error-message">{error}</p>}
       </form>
+      <a href="/register">Register</a>
     </div>
   );
 };
