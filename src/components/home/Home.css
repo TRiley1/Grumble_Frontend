@@ -1,0 +1,17 @@
+body{
+    background-color: #EB3937;
+}
+
+.home-container{
+    width : 100vw;
+    height : 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+
+.grumble-feed{
+    width: 70%;
+    height: 100%;
+    background-color: #EB3937;
+}
