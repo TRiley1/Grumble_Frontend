@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import GrumbleList from "../GrumbleList";
+import GrumbleList from "../grumble/GrumbleList";
 import './Home.css'
 
 const Home = ({ username, authToken }) => {
