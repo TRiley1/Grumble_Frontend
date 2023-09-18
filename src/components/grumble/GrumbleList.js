@@ -1,4 +1,5 @@
 import Grumble from "./Grumble"
+import './GrumbleList.css'
 
 const GrumbleList = ({grumbles}) => {
 
@@ -8,7 +9,7 @@ const GrumbleList = ({grumbles}) => {
         })
 
     return ( 
-        <div>
+        <div className = "grumble-list-container">
             {grumbleNode}
         </div>
         

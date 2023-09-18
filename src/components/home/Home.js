@@ -1,21 +1,31 @@
 import React, { useState, useEffect } from "react";
 import GrumbleList from "../grumble/GrumbleList";
 import './Home.css'
+import GrumblePost from "../grumblePost/GrumblePost";
 
 const Home = ({ username, authToken }) => {
   const [grumbles, setGrumbles] = useState([]);
+  console.log(authToken)
 
   useEffect(() => {
     getGrumbles();
   }, []);
 
+
+  useEffect(() => {
+    getGrumbles();
+  }, [grumbles]);
+
   const grumbleUrl = 'http://localhost:8080/grumbles';
+  const addGrumbleUrl = 'http://localhost:8080/grumbles/add';
+  const accessToken = `Bearer ${authToken}`
+  console.log(accessToken)
 
   const getGrumbles = () => {
     fetch(grumbleUrl, {
       method: "GET",
       headers: {
-        Authorization: "Bearer " + authToken,
+        Authorization: `Bearer ${authToken}`,
       },
     })
       .then((response) => response.json())
@@ -27,6 +37,30 @@ const Home = ({ username, authToken }) => {
       });
   };
 
+  const onPost = (grumble) => {
+    fetch(addGrumbleUrl, {
+      method: "POST",
+      headers: {
+        Authorization: accessToken, 
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(grumble),
+    })
+    .then((response) => {
+      console.log('Response status:', response.status);
+      if (response.ok) {
+        console.log('Grumble successfully posted');
+      } else {
+        response.text().then((errorText) => {
+          console.error('Failed to post grumble. Error:', errorText);
+        });
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  };
+
 
 
   return (
@@ -35,6 +69,7 @@ const Home = ({ username, authToken }) => {
     <div class = "home-container">
         <div class = "grumble-feed">
             <h1>Welcome {username}</h1>
+            <GrumblePost onPost = {onPost} username = {username}/>
             <GrumbleList grumbles = {grumbles}/>
         </div>
     </div>
