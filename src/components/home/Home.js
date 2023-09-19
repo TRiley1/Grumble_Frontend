@@ -5,7 +5,6 @@ import GrumblePost from "../grumblePost/GrumblePost";
 
 const Home = ({ username, authToken }) => {
   const [grumbles, setGrumbles] = useState([]);
-  console.log(authToken)
 
   useEffect(() => {
     getGrumbles();
@@ -19,7 +18,6 @@ const Home = ({ username, authToken }) => {
   const grumbleUrl = 'http://localhost:8080/grumbles';
   const addGrumbleUrl = 'http://localhost:8080/grumbles/add';
   const accessToken = `Bearer ${authToken}`
-  console.log(accessToken)
 
   const getGrumbles = () => {
     fetch(grumbleUrl, {
@@ -47,7 +45,6 @@ const Home = ({ username, authToken }) => {
       body: JSON.stringify(grumble),
     })
     .then((response) => {
-      console.log('Response status:', response.status);
       if (response.ok) {
         console.log('Grumble successfully posted');
       } else {

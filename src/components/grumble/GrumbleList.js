@@ -3,14 +3,19 @@ import './GrumbleList.css'
 
 const GrumbleList = ({grumbles}) => {
 
-    const grumbleNode = 
-        grumbles.map((grumble, id) => {
-            return <Grumble grumble = {grumble} key = {id}/>
-        })
+    const grumbleNodes = (arr) => {
+        const feed = [];
+        for(let grumble of arr){
+            const item = <Grumble grumble = {grumble} />
+            feed.unshift(item);
+        }
+        return feed
+    }
+
 
     return ( 
         <div className = "grumble-list-container">
-            {grumbleNode}
+            {grumbleNodes(grumbles)}
         </div>
         
      );
