@@ -18,7 +18,7 @@ const GrumbleList = ({grumbles}) => {
     }
 
     const handleClick = () => {
-        setNoOfMessages(prev => prev + 5 )
+        setNoOfMessages(prev => prev + 5)
     }
 
 
