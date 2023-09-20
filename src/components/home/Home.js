@@ -67,7 +67,7 @@ const Home = ({ username, authToken }) => {
         <div class = "grumble-feed">
             <h1>Welcome {username}</h1>
             <GrumblePost onPost = {onPost} username = {username}/>
-            <GrumbleList grumbles = {grumbles}/>
+            <GrumbleList grumbles = {grumbles} authToken = {authToken} username = {username}/>
         </div>
     </div>
   </>

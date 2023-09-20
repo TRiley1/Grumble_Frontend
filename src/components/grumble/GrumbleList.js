@@ -3,14 +3,14 @@ import './GrumbleList.css'
 import React, { useState } from 'react';
 
 
-const GrumbleList = ({grumbles}) => {
+const GrumbleList = ({grumbles, authToken, username}) => {
 
     const [noOfMessages, setNoOfMessages] = useState(5);
 
     const grumbleNodes = (arr, num) => {
         const grumbles = [];
         for(let grumble of arr){
-            const item = <Grumble grumble = {grumble} />
+            const item = <Grumble grumble = {grumble} authToken = {authToken} username = {username} />
             grumbles.unshift(item);
         }
         const feed = grumbles.slice(0,num)
