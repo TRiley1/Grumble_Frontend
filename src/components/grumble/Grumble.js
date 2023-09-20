@@ -8,7 +8,7 @@ const Grumble = ({ grumble, authToken, username }) => {
     if (!users || users.length === 0) {
       return null;
     }
-    
+
     const firstUser = users[0]?.username;
 
     if (users.length === 0) {
@@ -61,7 +61,7 @@ const Grumble = ({ grumble, authToken, username }) => {
       </div>
       <p className="grumble-text">{grumble.grumble}</p>
       {renderMessage(grumble.likingUsers, 'agree', 'likes')}
-      {renderMessage(grumble.disLikingUsers, 'disagree', 'dislikes')}
+      {renderMessage(grumble.dislikingUsers, 'disagree', 'dislikes')}
       <div className="button-container">
         <button className="like-button" onClick={() => handleClick(grumble, authToken, username, 'like')}>Like</button>
         <button className="dislike-button" onClick={() => handleClick(grumble, authToken, username, 'dislike')}>Dislike</button>
