@@ -1,50 +1,51 @@
 /* Grumble.css */
-
-/* Style the container */
 .grumble-container {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 10px;
-    background-color: #fff;
-    border-radius: 5px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin: 16px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-  .grumble-header{
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  /* Style the username */
-  .grumble-username {
-    font-weight: bold;
-  }
-  
-  /* Style the grumble text */
-  .grumble-text {
-    margin-top: 5px;
-  }
-  
-  /* Style the like and dislike buttons */
-  .like-button, .dislike-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    margin-right: 5px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  /* Change button color on hover */
-  .like-button:hover, .dislike-button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Style the button container */
-  .button-container {
-    margin-top: 10px;
-  }
-  
+.grumble-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.grumble-username {
+  font-weight: bold;
+}
+
+.grumble-text {
+  margin-top: 8px;
+}
+
+.button-container {
+  margin-top: 16px;
+}
+
+.like-button,
+.dislike-button {
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+.like-button {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.dislike-button {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.like-button:hover,
+.dislike-button:hover {
+  opacity: 0.8;
+}
