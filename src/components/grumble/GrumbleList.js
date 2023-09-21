@@ -10,7 +10,7 @@ const GrumbleList = ({grumbles, authToken, username}) => {
     const grumbleNodes = (arr, num) => {
         const grumbles = [];
         for(let grumble of arr){
-            const item = <Grumble grumble = {grumble} authToken = {authToken} username = {username} />
+            const item = <Grumble grumble = {grumble} authToken = {authToken} username = {username} key = {grumble.id} />
             grumbles.unshift(item);
         }
         const feed = grumbles.slice(0,num)

@@ -7,11 +7,14 @@ const Grumble = ({ grumble, authToken, username }) => {
   const [dislikesCount, setDislikesCount] = useState(grumble.dislikingUsers.length);
 
   useEffect(() => {
-    // Check if the total votes reach the threshold
-    if (likesCount + dislikesCount === 3) {
-      if (likesCount > dislikesCount) {
+    const totalVotes = likesCount + dislikesCount;
+    const likesPercentage = totalVotes > 0 ? (likesCount / totalVotes) * 100 : 0;
+    const dislikesPercentage = totalVotes > 0 ? (dislikesCount / totalVotes) * 100 : 0;
+
+    if (totalVotes >= 3) {
+      if (likesPercentage >= 65) {
         setApproval("Valid");
-      } else {
+      } else if (dislikesPercentage >= 65) {
         setApproval("Invalid");
       }
     }
