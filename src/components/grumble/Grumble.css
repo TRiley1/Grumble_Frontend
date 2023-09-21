@@ -49,3 +49,12 @@
 .dislike-button:hover {
   opacity: 0.8;
 }
+
+.grumble-container.valid {
+  background-color: #4caf50; /* Green background color */
+}
+
+/* Styles for Invalid Card */
+.grumble-container.invalid {
+  background-color: #f44336; /* Red background color */
+}
