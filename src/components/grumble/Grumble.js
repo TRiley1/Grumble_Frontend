@@ -2,23 +2,27 @@ import React, { useState, useEffect } from "react";
 import "./Grumble.css";
 
 const Grumble = ({ grumble, authToken, username }) => {
-  const [approval, setApproval] = useState("Pending Approval");
+
+  
   const [likesCount, setLikesCount] = useState(grumble.likingUsers.length);
   const [dislikesCount, setDislikesCount] = useState(grumble.dislikingUsers.length);
+  
 
   useEffect(() => {
     const totalVotes = likesCount + dislikesCount;
     const likesPercentage = totalVotes > 0 ? (likesCount / totalVotes) * 100 : 0;
     const dislikesPercentage = totalVotes > 0 ? (dislikesCount / totalVotes) * 100 : 0;
 
-    if (totalVotes >= 3) {
+    if (totalVotes >= 3 && grumble.approval === "Pending Approval") {
       if (likesPercentage >= 65) {
-        setApproval("Valid");
+        handleVerdict("Valid", grumble.id);
       } else if (dislikesPercentage >= 65) {
-        setApproval("Invalid");
+        handleVerdict("Invalid", grumble.id);
       }
     }
-  }, [likesCount, dislikesCount]);
+  }, [likesCount, dislikesCount, grumble]);
+
+  
 
   const renderMessage = (users, messagePrefix, verb) => {
     if (!users || users.length === 0) {
@@ -39,9 +43,34 @@ const Grumble = ({ grumble, authToken, username }) => {
     }
   };
 
+  const handleVerdict = (approvalStatus, grumble) => {
+    const verdictAPI = "http://localhost:8080/grumbles/verdict";
+    const verdictBody = { grumbleID: grumble.id, verdict: approvalStatus };
+  
+    fetch(verdictAPI, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify(verdictBody),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Network response was not ok: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Verdict submitted successfully:", data);
+      })
+      .catch((error) => {
+        console.error("Error submitting verdict:", error);
+      });
+  };
+
   const handleLikeDislikeClick = (likeType) => {
-    // Check if the grumble is still in "Pending Approval" status
-    if (approval === "Pending Approval") {
+    if (grumble.approval === "Pending Approval") {
       const body = {
         id: grumble.id,
         username: username,
@@ -88,32 +117,41 @@ const Grumble = ({ grumble, authToken, username }) => {
   };
 
   return (
-    <div className={`grumble-container ${approval.toLowerCase()}`}>
-      <div className="grumble-header">
-        <h2 className="grumble-username">{grumble.user.username}</h2>
-        <h2>{approval}</h2>
-      </div>
-      <p className="grumble-text">{grumble.grumble}</p>
-      {renderMessage(grumble.likingUsers, "agree", "likes")}
-      {renderMessage(grumble.dislikingUsers, "disagree", "dislikes")}
-      {approval === "Pending Approval" ? (
-        <div className="button-container">
-          <button
-            className="like-button"
-            onClick={() => handleLikeDislikeClick("like")}
-          >
-            Like
-          </button>
-          <button
-            className="dislike-button"
-            onClick={() => handleLikeDislikeClick("dislike")}
-          >
-            Dislike
-          </button>
+    <div>
+      {grumble ? (
+        <div className={`grumble-container ${grumble?.approval?.toLowerCase()}`}>
+          <div>
+            <div className="grumble-header">
+              <h2 className="grumble-username">{grumble.user.username}</h2>
+              <h2>{grumble.approval}</h2>
+            </div>
+            <p className="grumble-text">{grumble.grumble}</p>
+            {renderMessage(grumble.likingUsers, "agree", "likes")}
+            {renderMessage(grumble.dislikingUsers, "disagree", "dislikes")}
+            {grumble.approval === "Pending Approval" ? (
+              <div className="button-container">
+                <button
+                  className="like-button"
+                  onClick={() => handleLikeDislikeClick("like")}
+                >
+                  Like
+                </button>
+                <button
+                  className="dislike-button"
+                  onClick={() => handleLikeDislikeClick("dislike")}
+                >
+                  Dislike
+                </button>
+              </div>
+            ) : null}
+          </div>
         </div>
-      ) : null}
+      ) : (
+        <div>No grumble data available</div>
+      )}
     </div>
   );
-};
+  
 
+}
 export default Grumble;
