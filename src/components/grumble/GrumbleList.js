@@ -1,15 +1,32 @@
 import Grumble from "./Grumble"
 import './GrumbleList.css'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 
 const GrumbleList = ({grumbles, authToken, username}) => {
 
     const [noOfMessages, setNoOfMessages] = useState(5);
+    const [isActive, setisActive] = useState('all');
 
-    const grumbleNodes = (arr, num) => {
+    useEffect(()=>{
+        grumbleNodes(grumbles, noOfMessages, isActive)
+    }, [isActive])
+
+    const grumbleFilter = (arr, isActive) => {
+        if (isActive === 'all'){
+            return arr;
+        }
+        else{
+            const result = arr.filter(el => el.approval === isActive)
+            return result;
+        } 
+    }
+
+
+    const grumbleNodes = (arr, num, isActive) => {
         const grumbles = [];
-        for(let grumble of arr){
+        const filterGrumbles = grumbleFilter(arr, isActive)
+        for(let grumble of filterGrumbles){
             const item = <Grumble grumble = {grumble} authToken = {authToken} username = {username} key = {grumble.id} />
             grumbles.unshift(item);
         }
@@ -24,8 +41,13 @@ const GrumbleList = ({grumbles, authToken, username}) => {
 
     return ( 
         <>
+            <div className = "grumble-filter-tabs">
+                <button onClick={()=> setisActive("Pending Approval")}>Pending</button>
+                <button onClick={()=> setisActive("Valid")}>Valid</button>
+                <button onClick={()=> setisActive("Invalid")}>Invalid</button>
+            </div>   
             <div className = "grumble-list-container">
-                {grumbleNodes(grumbles, noOfMessages)}
+                {grumbleNodes(grumbles, noOfMessages, isActive)}
             </div>
             <div className="show-more-button">
                 <button onClick={handleClick}>Show More!</button>
