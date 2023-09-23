@@ -11,8 +11,8 @@ const Home = ({ username, authToken }) => {
   const [userProfile, setUserProfile] = useState(null);
 
   useEffect(() => {
-    getGrumbles();
     getUserProfile();
+    getGrumbles();
   }, []);
 
   useEffect(() => {
@@ -115,10 +115,11 @@ const Home = ({ username, authToken }) => {
     <>
       <div className="home-container">
         <Navbar />
-        <div className="grumble-feed">
+        <div className="grumble-pic">
           {renderUserProfile()}
-
           <Edit />
+        </div>
+        <div className="grumble-feed">
           <h1>Welcome {username}</h1>
           <GrumblePost onPost={onPost} username={username} />
           <GrumbleList
