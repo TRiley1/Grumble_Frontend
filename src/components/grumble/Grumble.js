@@ -134,13 +134,13 @@ const Grumble = ({ grumble, authToken, username }) => {
                   className="like-button"
                   onClick={() => handleLikeDislikeClick("like")}
                 >
-                  Like
+                  Agree
                 </button>
                 <button
                   className="dislike-button"
                   onClick={() => handleLikeDislikeClick("dislike")}
                 >
-                  Dislike
+                  Disagree
                 </button>
               </div>
             ) : null}

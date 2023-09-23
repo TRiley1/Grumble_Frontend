@@ -9,7 +9,8 @@ const GrumbleList = ({grumbles, authToken, username}) => {
     const [isActive, setisActive] = useState('all');
 
     useEffect(()=>{
-        grumbleNodes(grumbles, noOfMessages, isActive)
+        setNoOfMessages(5);
+        grumbleNodes(grumbles, noOfMessages, isActive);
     }, [isActive])
 
     const grumbleFilter = (arr, isActive) => {
