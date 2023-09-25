@@ -5,6 +5,7 @@ import GrumblePost from "../grumblePost/GrumblePost";
 import Navbar from "../navbar/Navbar";
 import ProfilePic from "../../icons/ProfilePic";
 import Edit from "../../icons/Edit";
+import { Link } from "react-router-dom";
 
 const Home = ({ username, authToken }) => {
   const [grumbles, setGrumbles] = useState([]);
@@ -117,7 +118,11 @@ const Home = ({ username, authToken }) => {
         <Navbar />
         <div className="grumble-pic">
           {renderUserProfile()}
-          <Edit />
+          <Link to="/edit">
+            <button>
+              <Edit />
+            </button>
+          </Link>
         </div>
         <div className="grumble-feed">
           <h1>Welcome {username}</h1>

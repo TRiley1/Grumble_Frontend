@@ -4,6 +4,7 @@ import './GrumbleContainer.css';
 import Login from '../components/login/Login';
 import Register from '../components/register/Register';
 import Home from '../components/home/Home';
+import EditProfile from '../components/editProfile/EditProfile';
 
 const GrumbleContainer = () => {
   const [authToken, setAuthToken] = useState('');
@@ -30,6 +31,10 @@ const GrumbleContainer = () => {
           <Route
             path='/home'
             element={<Home username = {username} authToken = {authToken}/>}
+           /> 
+          <Route
+            path='/edit'
+            element={<EditProfile username = {username} authToken = {authToken}/>}
            /> 
         </Routes>
       </>
