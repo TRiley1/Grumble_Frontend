@@ -11,6 +11,7 @@
     width: 100px; /* Adjust the size as needed */
     height: 100px; /* Adjust the size as needed */
     margin: 20px auto;
+    margin-bottom: 20px;
   }
   
   /* Style the form */
@@ -76,6 +77,7 @@
 
   .form-grid {
     margin-right: 450px;
+    padding: 20px;
   }
 
   .form button {

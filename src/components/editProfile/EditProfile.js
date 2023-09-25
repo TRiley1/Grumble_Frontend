@@ -163,8 +163,6 @@ const EditProfile = () => {
         skinColor={formData.skinColor} 
         className="profile-pic"
       />
-
-      <h2>Edit Profile</h2>
       <div className="form-grid">
         <form className="form" onSubmit={handleSubmit}>
             {Object.keys(options).map((optionKey) =>
