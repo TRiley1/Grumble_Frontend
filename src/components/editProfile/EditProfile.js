@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import ProfilePic from "../../icons/ProfilePic";
+import './EditProfile.css'
+import Navbar from "../navbar/Navbar";
 
 const EditProfile = () => {
   const options = {
@@ -143,7 +145,9 @@ const EditProfile = () => {
   };
 
   return (
-    <div>
+    <>
+    <Navbar/>
+    <div className="edit-container">
       <ProfilePic
         avatarStyle={formData.avatarStyle} 
         topType={formData.hair} 
@@ -157,20 +161,24 @@ const EditProfile = () => {
         eyebrowType={formData.eyebrowType} 
         mouthType={formData.mouthType} 
         skinColor={formData.skinColor} 
+        className="profile-pic"
       />
 
       <h2>Edit Profile</h2>
-      <form onSubmit={handleSubmit}>
-        {Object.keys(options).map((optionKey) =>
-          renderSelectInput(
-            optionKey,
-            optionKey,
-            options[optionKey]
-          )
-        )}
-        <button type="submit">Save</button>
-      </form>
+      <div className="form-grid">
+        <form className="form" onSubmit={handleSubmit}>
+            {Object.keys(options).map((optionKey) =>
+            renderSelectInput(
+                optionKey,
+                optionKey,
+                options[optionKey]
+            )
+            )}
+            <button type="submit">Save</button>
+        </form>
+      </div>
     </div>
+    </>
   );
 };
 

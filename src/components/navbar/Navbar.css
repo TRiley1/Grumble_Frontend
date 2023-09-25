@@ -1,7 +1,7 @@
 /* Navbar.css */
 .navbar {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #fff;
+    color: #EB3937;
     padding: 10px 0;
     width: 100dvw;
   }
@@ -16,7 +16,7 @@
     font-size: 24px;
     font-weight: bold;
     text-decoration: none;
-    color: #fff;
+    color: #EB3937;
   }
   
   .navbar-menu {
@@ -36,7 +36,7 @@
   
   .navbar-item a {
     text-decoration: none;
-    color: #fff;
+    color: #EB3937;
     font-weight: bold;
     font-size: 16px;
     transition: color 0.3s;

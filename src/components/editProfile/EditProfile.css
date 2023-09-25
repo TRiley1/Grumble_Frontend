@@ -1,0 +1,85 @@
+/* EditProfile.css */
+
+/* Style the container div */
+.container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Style the profile pic */
+  .profile-pic {
+    width: 100px; /* Adjust the size as needed */
+    height: 100px; /* Adjust the size as needed */
+    margin: 20px auto;
+  }
+  
+  /* Style the form */
+  .form {
+    max-width: 400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr; /* Adjust the number of columns as needed */
+  grid-gap: 20px;
+  }
+  
+  /* Style the form elements */
+  .form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  .form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* Style the submit button */
+  .form button {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .form button:hover {
+    background-color: #0056b3;
+  }
+
+  .form select:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  }
+
+
+  .form select {
+    width: 200px; /* Change this value to your desired width */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  .edit-container {
+    width: 100vw; 
+    height: fit-content;
+    background-color: #ccc;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .form-grid {
+    margin-right: 450px;
+  }
+
+  .form button {
+    padding:10px;
+    margin-bottom: 30px;
+  }
+  
