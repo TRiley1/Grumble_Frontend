@@ -40,7 +40,7 @@
   
   /* Style the submit button */
   .form button {
-    background-color: #007BFF;
+    background-color: #EB3937;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -50,7 +50,7 @@
   }
   
   .form button:hover {
-    background-color: #0056b3;
+    background-color: #c52f2c;
   }
 
   .form select:hover {

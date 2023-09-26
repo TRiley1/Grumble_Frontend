@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProfilePic from "../../icons/ProfilePic";
-import './EditProfile.css'
+import "./EditProfile.css";
 import Navbar from "../navbar/Navbar";
+import { Location, useLocation } from "react-router-dom";
 
-const EditProfile = () => {
+const EditProfile = ({username, authToken}) => {
+
+  const location = useLocation();
+  const userProfile = location.state.userProfile;
+  
   const options = {
     skinColor: {
       Tanned: "Tanned",
@@ -99,34 +104,68 @@ const EditProfile = () => {
     },
   };
 
+  const user = userProfile?.userProfile?.avatarConfig;
+  
+
   const [formData, setFormData] = useState({
-    skinColor: "Tanned",
-    avatarStyle: "Circle",
-    clotheColor: "Black",
-    clothes: "Overall",
-    accessories: "Blank",
-    hair: "ShortHairShortCurly",
-    accessoriesType: "Kurt",
-    hairColor: "Black",
-    facialHairColor: "Black",
-    facialHair: "MoustacheFancy",
-    eyeType: "Default",
-    eyebrowType: "Default",
-    mouthType: "Default",
+    skinColor: user?.skinColor,
+    avatarStyle: user?.avatarStyle,
+    clotheColor: user?.clotheColor,
+    clothes: user?.clotheType,
+    hair: user?.topType,
+    accessories: user?.accessoriesType,
+    hairColor: user?.hairColor,
+    facialHairColor: user?.facialHairColor,
+    facialHair: user?.facialHairType,
+    eyeType: user?.eyeType,
+    eyebrowType: user?.eyebrowType,
+    mouthType: user?.mouthType,
   });
-  
-  
 
   const handleChange = (e) => {
     console.log("handleChange called");
     const { name, value } = e.target;
-    console.log(name,value)
+    console.log(name, value);
     setFormData({ ...formData, [name]: value });
+    console.log(formData)
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    const body = {
+      accesscoriesType: formData.accessories, 
+      avatarStyle: formData.avatarStyle,
+      clotheColour: formData.clotheColor,
+      clotheType: formData.clothes,
+      eyeType: formData.eyeType,
+      eyebrowType: formData.eyebrowType,
+      facialHairColour: formData.facialHairColor,
+      facialHairType: formData.facialHair,
+      hairColour: formData.hairColor,
+      mouthType: formData.mouthType,
+      skinColour: formData.skinColor,
+      hair: formData.hair,
+    };
+
+    const url = `http://localhost:8080/users/${username}`
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    })
+    .then((response) => {
+      if (response.ok) {
+        console.log("Profile successfully edited");
+      } else {
+        response.text().then((errorText) => {
+          console.error("Failed to edit. Error:", errorText);
+        });
+      }
+    })
   };
 
   const renderSelectInput = (label, name, options) => {
@@ -146,36 +185,32 @@ const EditProfile = () => {
 
   return (
     <>
-    <Navbar/>
-    <div className="edit-container">
-      <ProfilePic
-        avatarStyle={formData.avatarStyle} 
-        topType={formData.hair} 
-        accessoriesType={formData.accessories} 
-        hairColor={formData.hairColor} 
-        facialHairType={formData.facialHair} 
-        facialHairColor={formData.facialHairColor} 
-        clotheType={formData.clothes} 
-        clotheColor={formData.clotheColor} 
-        eyeType={formData.eyeType} 
-        eyebrowType={formData.eyebrowType} 
-        mouthType={formData.mouthType} 
-        skinColor={formData.skinColor} 
-        className="profile-pic"
-      />
-      <div className="form-grid">
-        <form className="form" onSubmit={handleSubmit}>
+      <Navbar />
+      <div className="edit-container">
+        <ProfilePic
+          avatarStyle={formData.avatarStyle}
+          topType={formData.hair}
+          accessoriesType={formData.accessories}
+          hairColor={formData.hairColor}
+          facialHairType={formData.facialHair}
+          facialHairColor={formData.facialHairColor}
+          clotheType={formData.clothes}
+          clotheColor={formData.clotheColor}
+          eyeType={formData.eyeType}
+          eyebrowType={formData.eyebrowType}
+          mouthType={formData.mouthType}
+          skinColor={formData.skinColor}
+          className="profile-pic"
+        />
+        <div className="form-grid">
+          <form className="form" onSubmit={handleSubmit}>
             {Object.keys(options).map((optionKey) =>
-            renderSelectInput(
-                optionKey,
-                optionKey,
-                options[optionKey]
-            )
+              renderSelectInput(optionKey, optionKey, options[optionKey])
             )}
             <button type="submit">Save</button>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
     </>
   );
 };
