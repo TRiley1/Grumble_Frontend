@@ -61,37 +61,39 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div class = 'login-card'>
-    <div class = 'login-card-header'></div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <button type="submit">Login</button>
-        </div>
-        {error && <p className="error-message">{error}</p>}
-      </form>
-      <a href="/register">Register</a>
+    <div className='container'>
+      <div class = 'login-card'>
+      <div class = 'login-card-header'></div>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="username">Username:</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <button type="submit">Login</button>
+          </div>
+          {error && <p className="error-message">{error}</p>}
+        </form>
+        <a href="/register">Register</a>
+      </div>
     </div>
   );
 };

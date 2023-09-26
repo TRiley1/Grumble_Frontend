@@ -1,5 +1,14 @@
 /* Login.css */
 
+.container{
+  background-image: url('/public/images/angryHome.jpg');
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .login-card {
     max-width: 400px;
     margin: 0 auto;

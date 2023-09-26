@@ -13,8 +13,12 @@ const ProfilePic = ({
   eyebrowType,
   mouthType,
   skinColor,
-  graphicType
+  graphicType,
+  size
 }) => {
+  // Define the size you want for the avatar
+  const avatarSize = size; // Adjust the size as needed
+
   return ( 
     <Avatar
       avatarStyle={avatarStyle}
@@ -30,9 +34,12 @@ const ProfilePic = ({
       eyebrowType={eyebrowType}
       mouthType={mouthType}
       skinColor={skinColor}
+      // Apply inline styles to set the size
+      style={{ width: avatarSize, height: avatarSize }}
     />
   );
 }
  
 export default ProfilePic;
+
 

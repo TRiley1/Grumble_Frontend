@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./Grumble.css";
+import ProfilePic from "../../icons/ProfilePic";
 
-const Grumble = ({ grumble, authToken, username }) => {
+const Grumble = ({ grumble, authToken, username, userProfile }) => {
 
-  
   const [likesCount, setLikesCount] = useState(grumble.likingUsers.length);
   const [dislikesCount, setDislikesCount] = useState(grumble.dislikingUsers.length);
   
-
+  // console.log(grumble)
   useEffect(() => {
     const totalVotes = likesCount + dislikesCount;
     const likesPercentage = totalVotes > 0 ? (likesCount / totalVotes) * 100 : 0;
@@ -42,6 +42,31 @@ const Grumble = ({ grumble, authToken, username }) => {
       );
     }
   };
+
+  const grumbleUser = grumble.user.userProfile.avatarConfig
+  
+
+  const grumbleProfilePic = () => {
+    return (
+      <div className="profile-pic-container">
+        <ProfilePic
+      avatarStyle={grumbleUser.avatarStyle}
+      topType={grumbleUser.topType}
+      accessoriesType={grumbleUser.accessoriesType}
+      hairColor={grumbleUser.hairColor}
+      facialHairType={grumbleUser.facialHairType}
+      facialHairColor={grumbleUser.facialHairColor}
+      clotheType={grumbleUser.clotheType}
+      clotheColor={grumbleUser.clotheColor}
+      eyeType={grumbleUser.eyeType}
+      eyebrowType={grumbleUser.eyebrowType}
+      mouthType={grumbleUser.mouthType}
+      skinColor={grumbleUser.skinColor}
+      size = "50px"
+        />
+      </div>
+    )
+}
 
   const handleVerdict = (approvalStatus, grumble) => {
     const verdictAPI = "http://localhost:8080/grumbles/verdict";
@@ -123,6 +148,7 @@ const Grumble = ({ grumble, authToken, username }) => {
           <div>
             <div className="grumble-header">
               <h2 className="grumble-username">{grumble.user.username}</h2>
+              {grumbleProfilePic()}
               <h2>{grumble.approval}</h2>
             </div>
             <p className="grumble-text">{grumble.grumble}</p>

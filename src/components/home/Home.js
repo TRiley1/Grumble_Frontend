@@ -20,7 +20,6 @@ const Home = ({ username, authToken }) => {
     getGrumbles();
   }, [grumbles]);
 
-  console.log(userProfile);
 
   const grumbleUrl = "http://localhost:8080/grumbles";
   const addGrumbleUrl = "http://localhost:8080/grumbles/add";
@@ -66,6 +65,7 @@ const Home = ({ username, authToken }) => {
           eyebrowType={avatarConfig?.eyebrowType}
           mouthType={avatarConfig?.mouthType}
           skinColor={avatarConfig?.skinColor}
+          size = '150px'
         />
       );
     } else {
@@ -118,16 +118,18 @@ const Home = ({ username, authToken }) => {
         <Navbar />
         <div className="grumble-pic">
           {renderUserProfile()}
-          <Link to="/edit" state={{ userProfile }}>
+          <div>
+            <Link to="/edit" state={{ userProfile }}>
             <button>
               <Edit/>
             </button>
-          </Link>
+            </Link>
+          </div>
+          <GrumblePost onPost={onPost} username={username} />
         </div>
         <div className="grumble-feed">
-          <h1>Welcome {username}</h1>
-          <GrumblePost onPost={onPost} username={username} />
           <GrumbleList
+            userProfile = {userProfile}
             grumbles={grumbles}
             authToken={authToken}
             username={username}

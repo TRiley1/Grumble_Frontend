@@ -1,12 +1,14 @@
 import Grumble from "./Grumble"
 import './GrumbleList.css'
 import React, { useState, useEffect } from 'react';
+import ProfilePic from "../../icons/ProfilePic";
 
-
-const GrumbleList = ({grumbles, authToken, username}) => {
+const GrumbleList = ({grumbles, authToken, username, userProfile}) => {
 
     const [noOfMessages, setNoOfMessages] = useState(5);
     const [isActive, setisActive] = useState('all');
+
+    
 
     useEffect(()=>{
         setNoOfMessages(5);
@@ -24,11 +26,12 @@ const GrumbleList = ({grumbles, authToken, username}) => {
     }
 
 
+
     const grumbleNodes = (arr, num, isActive) => {
         const grumbles = [];
         const filterGrumbles = grumbleFilter(arr, isActive)
         for(let grumble of filterGrumbles){
-            const item = <Grumble grumble = {grumble} authToken = {authToken} username = {username} key = {grumble.id} />
+            const item = <Grumble grumble = {grumble} authToken = {authToken} username = {username} key = {grumble.id} userProfile = {userProfile} />
             grumbles.unshift(item);
         }
         const feed = grumbles.slice(0,num)

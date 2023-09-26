@@ -1,12 +1,12 @@
 /* Navbar.css */
 .navbar {
-    background-color: #fff;
-    color: #EB3937;
+    background-color: #EB3937;
+    color: #fff;
     padding: 10px 0;
     width: 100dvw;
   }
   
-  .container {
+  .navbar-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,7 +16,7 @@
     font-size: 24px;
     font-weight: bold;
     text-decoration: none;
-    color: #EB3937;
+    color: #fff;
   }
   
   .navbar-menu {
@@ -36,7 +36,7 @@
   
   .navbar-item a {
     text-decoration: none;
-    color: #EB3937;
+    color: #fff;
     font-weight: bold;
     font-size: 16px;
     transition: color 0.3s;
