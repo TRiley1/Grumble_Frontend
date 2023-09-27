@@ -2,10 +2,19 @@
 
 .home-container {
     width: 100vw;
-    height: 100vh;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #F4F2EE;
+}
+
+.grumble-user-edit {
+    margin-right: 15px;
+}
+
+.grumble-user-edit > button {
+    border-radius: 100px;
 }
 
 

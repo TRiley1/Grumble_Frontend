@@ -12,9 +12,6 @@ const Navbar = () => {
                     <Link to="/profile">Profile</Link>
                   </li>
                   <li className="navbar-item">
-                    <Link to="/notifications">Notifications</Link>
-                  </li>
-                  <li className="navbar-item">
                     <Link to="/">Logout</Link>
                   </li>
                 </ul>

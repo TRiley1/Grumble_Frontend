@@ -118,7 +118,7 @@ const Home = ({ username, authToken }) => {
         <Navbar />
         <div className="grumble-pic">
           {renderUserProfile()}
-          <div>
+          <div className="grumble-user-edit">
             <Link to="/edit" state={{ userProfile }}>
             <button>
               <Edit/>

@@ -4,26 +4,15 @@
     width: 55%;
 }
 
+ hr {
+  width : 300px;
+  border: 2px solid rgb(190, 37, 17);
+  border-radius: 5px;
+  margin-right: 3px;
+ }
 
-.grumble-filter-tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  /* Style for individual filter buttons */
-  .grumble-filter-tabs button {
-    background-color: #007bff; 
-    color: #fff; 
-    border: none;
-    padding: 10px 20px;
-    margin: 0 10px;
-    cursor: pointer;
-    transition: background-color 0.3s; 
-  }
-  
-  /* Style for filter buttons on hover */
-  .grumble-filter-tabs button:hover {
-    background-color: #0056b3; 
-  }
+ .grumble-filter{
+  display: flex;
+ }
+
   

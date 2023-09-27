@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import "./Grumble.css";
 import ProfilePic from "../../icons/ProfilePic";
 
+
 const Grumble = ({ grumble, authToken, username, userProfile }) => {
+
+  console.log(grumble.id)
 
   const [likesCount, setLikesCount] = useState(grumble.likingUsers.length);
   const [dislikesCount, setDislikesCount] = useState(grumble.dislikingUsers.length);
@@ -15,9 +18,9 @@ const Grumble = ({ grumble, authToken, username, userProfile }) => {
 
     if (totalVotes >= 3 && grumble.approval === "Pending Approval") {
       if (likesPercentage >= 65) {
-        handleVerdict("Valid", grumble.id);
+        handleVerdict("Valid", grumble);
       } else if (dislikesPercentage >= 65) {
-        handleVerdict("Invalid", grumble.id);
+        handleVerdict("Invalid", grumble);
       }
     }
   }, [likesCount, dislikesCount, grumble]);
@@ -71,7 +74,8 @@ const Grumble = ({ grumble, authToken, username, userProfile }) => {
   const handleVerdict = (approvalStatus, grumble) => {
     const verdictAPI = "http://localhost:8080/grumbles/verdict";
     const verdictBody = { grumbleID: grumble.id, verdict: approvalStatus };
-  
+    
+    console.log(verdictBody)
     fetch(verdictAPI, {
       method: "POST",
       headers: {
@@ -141,15 +145,31 @@ const Grumble = ({ grumble, authToken, username, userProfile }) => {
     }
   };
 
+  const approvalImageRenderer = (grumble) => {
+    if(grumble.approval === "Pending Approval"){
+      // return <h2>Pending Approval</h2>
+      return <img className = "stamp-image" src="/images/pending.png" alt="pending pass stamp" />
+    }
+    else if (grumble.approval === "Valid") {
+      return <img className = "stamp-image" src="/images/Pass stamp 02.png" alt="green pass stamp" />
+    }
+    else {
+      return <img className = "stamp-image" src="/images/Rejected stamp 03.png" alt="red pass stamp" />
+    }
+  }
+
   return (
     <div>
       {grumble ? (
         <div className={`grumble-container ${grumble?.approval?.toLowerCase()}`}>
           <div>
             <div className="grumble-header">
-              <h2 className="grumble-username">{grumble.user.username}</h2>
               {grumbleProfilePic()}
-              <h2>{grumble.approval}</h2>
+              <div class = "grumble-name" style={{ flex: 2 }}>
+                <h2 className="grumble-username">{grumble.user.username}</h2>
+                <h3>professional grumbler</h3>
+              </div>
+              {approvalImageRenderer(grumble)}
             </div>
             <p className="grumble-text">{grumble.grumble}</p>
             {renderMessage(grumble.likingUsers, "agree", "likes")}

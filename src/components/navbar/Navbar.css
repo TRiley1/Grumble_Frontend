@@ -17,6 +17,7 @@
     font-weight: bold;
     text-decoration: none;
     color: #fff;
+    margin-left: 50px;
   }
   
   .navbar-menu {
@@ -31,7 +32,7 @@
   }
   
   .navbar-item:last-child {
-    margin-right: 0;
+    margin-right: 50px;
   }
   
   .navbar-item a {

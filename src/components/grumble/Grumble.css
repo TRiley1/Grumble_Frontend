@@ -11,8 +11,26 @@
 
 .grumble-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
+}
+
+.grumble-name {
+  line-height: 0%;
+}
+
+.stamp-image {
+  width: 50px;
+  height: 50px;
+}
+
+.grumble-name > h3{
+  font-size: 15px;
+  color: #ccc;
+}
+
+.grumble-header > * {
+  margin-right: 20px;
 }
 
 .grumble-username {
