@@ -21,6 +21,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr; /* Adjust the number of columns as needed */
   grid-gap: 20px;
+
+  
   }
   
   /* Style the form elements */
@@ -68,7 +70,7 @@
 
   .edit-container {
     width: 100vw; 
-    height: fit-content;
+    height: 100vh;
     background-color: #ccc;
     display: flex;
     align-items: center;
@@ -85,3 +87,39 @@
     margin-bottom: 30px;
   }
   
+  @media (max-width: 768px) {
+    .container {
+      padding: 10px; /* Adjust padding for smaller screens */
+    }
+  
+    .profile-pic {
+      width: 80px; /* Adjust the size for smaller screens */
+      height: 80px; /* Adjust the size for smaller screens */
+      margin: 10px auto; /* Adjust margins for smaller screens */
+      margin-bottom: 10px; /* Adjust margins for smaller screens */
+    }
+  
+    .form {
+      max-width: 300px; /* Adjust max-width for smaller screens */
+      grid-template-columns: 1fr 1fr; /* Display form elements in a single column */
+      grid-gap: 10px; /* Adjust grid gap for smaller screens */
+    }
+  
+    .form label {
+      font-size: 14px; /* Adjust font size for labels on smaller screens */
+    }
+  
+    .form select, .form button {
+      width: 100%; /* Make select and button full-width on smaller screens */
+    }
+  
+    .form button {
+      padding: 8px; /* Adjust button padding for smaller screens */
+      margin-bottom: 20px; /* Adjust button margin for smaller screens */
+    }
+
+    .form-grid {
+      margin-right: 0px;
+    }
+
+  }

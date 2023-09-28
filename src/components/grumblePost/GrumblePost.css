@@ -8,6 +8,7 @@
   }
   
   .message-post textarea {
+    height: 60px;
     border: 1px solid #ccc;
     padding: 10px;
     border-radius: 5px;

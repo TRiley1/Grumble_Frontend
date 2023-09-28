@@ -5,7 +5,7 @@ import ProfilePic from "../../icons/ProfilePic";
 
 const Grumble = ({ grumble, authToken, username, userProfile }) => {
 
-  console.log(grumble.id)
+  // console.log(grumble.id)
 
   const [likesCount, setLikesCount] = useState(grumble.likingUsers.length);
   const [dislikesCount, setDislikesCount] = useState(grumble.dislikingUsers.length);
@@ -75,7 +75,7 @@ const Grumble = ({ grumble, authToken, username, userProfile }) => {
     const verdictAPI = "http://localhost:8080/grumbles/verdict";
     const verdictBody = { grumbleID: grumble.id, verdict: approvalStatus };
     
-    console.log(verdictBody)
+    // console.log(verdictBody)
     fetch(verdictAPI, {
       method: "POST",
       headers: {
@@ -159,7 +159,7 @@ const Grumble = ({ grumble, authToken, username, userProfile }) => {
   }
 
   return (
-    <div>
+    <div className = 'grumble-card-container'>
       {grumble ? (
         <div className={`grumble-container ${grumble?.approval?.toLowerCase()}`}>
           <div>
@@ -167,7 +167,7 @@ const Grumble = ({ grumble, authToken, username, userProfile }) => {
               {grumbleProfilePic()}
               <div class = "grumble-name" style={{ flex: 2 }}>
                 <h2 className="grumble-username">{grumble.user.username}</h2>
-                <h3>professional grumbler</h3>
+                <h3 className="profile-tagline">professional grumbler</h3>
               </div>
               {approvalImageRenderer(grumble)}
             </div>

@@ -9,6 +9,10 @@
     background-color: #F4F2EE;
 }
 
+.profile-image {
+    margin-bottom: 20px;
+}
+
 .grumble-user-edit {
     margin-right: 15px;
 }
@@ -27,6 +31,10 @@
     flex-direction: column;
     align-items: center;
     border-radius: 20px;
+
+    @media (max-width: 768px) {
+        width: 95%; 
+    }
 }
 
 .grumble-pic {

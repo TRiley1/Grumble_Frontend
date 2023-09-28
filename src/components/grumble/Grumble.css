@@ -1,4 +1,9 @@
 /* Grumble.css */
+.grumble-card-container {
+  display: flex;
+  justify-content: center
+}
+
 .grumble-container {
   border: 1px solid #ccc;
   padding: 16px;
@@ -6,7 +11,15 @@
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-top: 10px;
-  width: 500px;
+  width: 80%;
+
+  @media (max-width: 768px) {
+    width: 100%; 
+}
+}
+
+.profile-tagline {
+  display: none;
 }
 
 .grumble-header {
