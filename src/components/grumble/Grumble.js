@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Grumble.css";
 import ProfilePic from "../../icons/ProfilePic";
+import JudgementBar from "../judgementBar/JudgementBar";
 
 
 const Grumble = ({ grumble, authToken, username, userProfile }) => {
@@ -9,14 +10,16 @@ const Grumble = ({ grumble, authToken, username, userProfile }) => {
 
   const [likesCount, setLikesCount] = useState(grumble.likingUsers.length);
   const [dislikesCount, setDislikesCount] = useState(grumble.dislikingUsers.length);
+
+  const totalVotes = likesCount + dislikesCount;
+  const likesPercentage = totalVotes > 0 ? (likesCount / totalVotes) * 100 : 0;
+  const dislikesPercentage = totalVotes > 0 ? (dislikesCount / totalVotes) * 100 : 0;
+  const grumbleThreshold = 3;
   
   // console.log(grumble)
   useEffect(() => {
-    const totalVotes = likesCount + dislikesCount;
-    const likesPercentage = totalVotes > 0 ? (likesCount / totalVotes) * 100 : 0;
-    const dislikesPercentage = totalVotes > 0 ? (dislikesCount / totalVotes) * 100 : 0;
 
-    if (totalVotes >= 3 && grumble.approval === "Pending Approval") {
+    if (totalVotes >= grumbleThreshold && grumble.approval === "Pending Approval") {
       if (likesPercentage >= 65) {
         handleVerdict("Valid", grumble);
       } else if (dislikesPercentage >= 65) {
@@ -172,8 +175,9 @@ const Grumble = ({ grumble, authToken, username, userProfile }) => {
               {approvalImageRenderer(grumble)}
             </div>
             <p className="grumble-text">{grumble.grumble}</p>
-            {renderMessage(grumble.likingUsers, "agree", "likes")}
-            {renderMessage(grumble.dislikingUsers, "disagree", "dislikes")}
+            {/* {renderMessage(grumble.likingUsers, "agree", "likes")}
+            {renderMessage(grumble.dislikingUsers, "disagree", "dislikes")} */}
+            <JudgementBar grumble={grumble} grumbleThreshold={grumbleThreshold} />
             {grumble.approval === "Pending Approval" ? (
               <div className="button-container">
                 <button
