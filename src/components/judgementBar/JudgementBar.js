@@ -19,9 +19,11 @@ const JudgementBar = ({ grumble, grumbleThreshold}) => {
     const barStyle = {
         backgroundImage: `linear-gradient(to right, green ${percentageLike}%, rgba(0, 0, 0, 0) 0%)`,
         height: '20px',
-        width: '95%',
+        width: '100%',
         borderRadius: '50px',
-        backgroundColor: backgroundBarColour()
+        backgroundColor: backgroundBarColour(),
+        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)', // Add shadow
+        // border: '1px solid black' // Add black outline
     };
 
     const [tooltip, setTooltip] = useState(false);
