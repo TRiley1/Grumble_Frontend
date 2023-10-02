@@ -71,9 +71,6 @@ const JudgementBar = ({ grumble, grumbleThreshold}) => {
                 <div className="bar" style={barStyle}></div>
                 {tooltip && <div className="tooltip">{percentageLike.toFixed(2)}%</div>}
             </div>
-            <div>
-                {renderMessage()}
-            </div>
         </div>
     );
 };

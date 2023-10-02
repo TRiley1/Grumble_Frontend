@@ -28,26 +28,6 @@ const Grumble = ({ grumble, authToken, username, userProfile }) => {
     }
   }, [likesCount, dislikesCount, grumble]);
 
-  
-
-  const renderMessage = (users, messagePrefix, verb) => {
-    if (!users || users.length === 0) {
-      return null;
-    }
-
-    const firstUser = users[0]?.username;
-
-    if (users.length === 1) {
-      return <h3>{`${firstUser} ${verb} this`}</h3>;
-    } else if (users.length === 2) {
-      const secondUser = users[1]?.username;
-      return <h3>{`${firstUser} & ${secondUser} ${messagePrefix}`}</h3>;
-    } else {
-      return (
-        <h3>{`${firstUser} & ${users.length - 1} others ${messagePrefix}`}</h3>
-      );
-    }
-  };
 
   const grumbleUser = grumble.user.userProfile.avatarConfig
   
@@ -101,12 +81,14 @@ const Grumble = ({ grumble, authToken, username, userProfile }) => {
       });
   };
 
-  const handleLikeDislikeClick = (likeType) => {
+  const handleClick = (likeType) => {
     if (grumble.approval === "Pending Approval") {
       const body = {
         id: grumble.id,
         username: username,
       };
+
+      console.log(body)
 
       const apiUrl =
         likeType === "like"
@@ -141,6 +123,7 @@ const Grumble = ({ grumble, authToken, username, userProfile }) => {
           } else {
             setDislikesCount(prev => prev + 1);
           }
+          
         })
         .catch((error) => {
           console.error(`Error ${likeType}ing grumble:`, error);
@@ -150,7 +133,6 @@ const Grumble = ({ grumble, authToken, username, userProfile }) => {
 
   const approvalImageRenderer = (grumble) => {
     if(grumble.approval === "Pending Approval"){
-      // return <h2>Pending Approval</h2>
       return <img className = "stamp-image" src="/images/pending.png" alt="pending pass stamp" />
     }
     else if (grumble.approval === "Valid") {
@@ -166,6 +148,7 @@ const Grumble = ({ grumble, authToken, username, userProfile }) => {
       {grumble ? (
         <div className={`grumble-container ${grumble?.approval?.toLowerCase()}`}>
           <div>
+            
             <div className="grumble-header">
               {grumbleProfilePic()}
               <div class = "grumble-name" style={{ flex: 2 }}>
@@ -174,23 +157,25 @@ const Grumble = ({ grumble, authToken, username, userProfile }) => {
               </div>
               {approvalImageRenderer(grumble)}
             </div>
-            <p className="grumble-text">{grumble.grumble}</p>
-            {/* {renderMessage(grumble.likingUsers, "agree", "likes")}
-            {renderMessage(grumble.dislikingUsers, "disagree", "dislikes")} */}
+            <hr />
+            <h2>Title : "This darn thing happened!"</h2>
+            <div className="speech-bubble">
+              <p className="grumble-text">{grumble.grumble}</p>
+            </div>
             <JudgementBar grumble={grumble} grumbleThreshold={grumbleThreshold} />
             {grumble.approval === "Pending Approval" ? (
               <div className="button-container">
                 <button
                   className="like-button"
-                  onClick={() => handleLikeDislikeClick("like")}
+                  onClick={() => handleClick("like")}
                 >
-                  Agree
+                  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACs0lEQVR4nO2ZTYhNYRjH3zFNGIzmNo1GUT4WiBoWPlNYS1mMLGZlwYLCkrCzEGqmKCxGsbBiQVkYpCwkNWWKGfkoZOQzY8i3n97mf+t0594zR+e54z06/zqb8z79///n3vfjOc/rXI4cOcYcwESgA3gLDAAngEaXJQC1wBVG4iFQcFkBcFDGXwCtwHzgrt4dcVkAsA74BfwAlkfer1Iij13oAJr0L3jsLRmbrPdfXMgAaoBLMnsNGFcy7qeYxwMXMoCdMvoamF5m/KjGj7lQASwGvgK/gfVlxuuBd0pkiQsRwCSgTyY7KsRs1fhNFyqA0zLZC0yoEFPceje5EAG0yeAnYF6FmDWRM6XOhQZgNjAok1ti4s4rZp8LDUAdcFsGz8XEzQJ++rMDaHahATikJJ7GFYJAp+JOudDA8JwvliArYuIaNPX8lrzAhQSgGXipX3lPwgOyHPzm8D7mGQBu+TLHlzbVKEEuy8jV0hKkTHw78J30uA9Ms0xke6QEaUl5gDaO8swANgD3pHnWKokC8EGkG01Ik+nOleagFeFuEXabECbXbSyuKSvCbhG2mRAm110k3X4rwlciHFGeVxPA6sgut82C0J/OHrUmDpPrjgeOR/TTFZ3FfdDM4d/r75CFO1lPpGCy6ANIZJksPM9sIgx3ZnpkoTPLifRK/knqlus/TuSi5L/FVdtZSKQGOCwL17O+2Jv+l11roSw8S0v0UURTzNwl154ZWfBdacn6RdRq5jCZbjvwObJrpav1gJMi22/mMplul3R7TLowuvMofh02mLhMprtUun2WpP6qADXcYr/XDTXrze9UgDm62PS4AEw1Ix+9JfvImnhlJJk3wAF/TWDdsgFa/IdUpCW7y5I/2vP17aCxwpmqTmVgre7Ofd9pyNj8EHAD2Fy1BHLkyOEyiz+lhVxrUBoKtwAAAABJRU5ErkJggg=="/>
                 </button>
                 <button
                   className="dislike-button"
-                  onClick={() => handleLikeDislikeClick("dislike")}
+                  onClick={() => handleClick("dislike")}
                 >
-                  Disagree
+                  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACqklEQVR4nO2ZXYgOYRiG37XJzyI2VmgPiNJKKPkJEadKyh7hRLQHFGcb9tSB9sBGUZQtJw7khFLys0UOKIpiV5TIT9Y/n1b+Lr3tPTV99ptv1jyzO5O5a06+ebrv+5n3eZ95vnecK1CgQIFKANYBx4FuoIQtSsB1YDNQ49IAMBvoYujQmUYSK4C3EngNtAELgTpjnWlAC/BRWi3WKxEkcQYYb0ZeWXOT9B5bknaFkkinbv/WHCvNPsuNHZRT6isRAFgi3W5nAXUnjzYTwvi6J6V7B5hqQdgjwgUmDuPrbgG+SvsJMCMp4WeRDVlZBQAagXsmrTho6IlIkunPk4VneU9kiix8yW0iQA3QLgtX85zIOcl/A5bnOZG7oa5Vn+dEJgO3ZeFw3jf7Ull4nvdE6mWhlPdEdsnCraREP0VUa+Yunu4o4CjwS/rNSQn91Osx3cxlPN1VQUkB2y0IL5k8kcHrzpdujxXhHhFeNiGMrzvJZJOXdY0PIt1oQhpPd440P1mS7hRprz8cSMBTpycddTUCG4AH0jxlPbxdCEoMGFElfivwneS4DzSYJSJzDcArCeytErs7wpzvQu8jrpfADaDV+qgpbHCN+vqPqGkUmOBrG/gNNLksAjioJ/vU13REXIfiTrgsAhgJ3JTJ0xFxMzUV9JnXuRWAWSodj20RcWcVs99lFUBzaPPOrRCzWjEv/Eq6rALolFF/ZDO6yr+8IR1x/uUF57+ReHRUiNmh+9dclgEs0uGAb7XrKxxGvxuO08pBI/QC7B1o3A+14iMuy6B/hDkvs1fKRxhgse49dFkH/Scevjt57Cu7N870W0faANaGRphlod9Xmn99ShvAgdC7wzeCptCJervLC4Ba4OIAU++jqNkskwDGAIeAN1qZY8DE4fZVoMD/jD+F8lxU+zNQqAAAAABJRU5ErkJggg=="/>
                 </button>
               </div>
             ) : null}
