@@ -11,14 +11,13 @@ const Home = ({ username, authToken }) => {
   const [grumbles, setGrumbles] = useState([]);
   const [userProfile, setUserProfile] = useState(null);
 
+  console.log(grumbles)
+
   useEffect(() => {
     getUserProfile();
     getGrumbles();
   }, []);
 
-  useEffect(() => {
-    getGrumbles();
-  }, [grumbles]);
 
 
   const grumbleUrl = "http://localhost:8080/grumbles";
@@ -99,18 +98,25 @@ const Home = ({ username, authToken }) => {
       body: JSON.stringify(grumble),
     })
       .then((response) => {
-        if (response.ok) {
-          console.log("Grumble successfully posted");
+        console.log(response);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data) {
+          console.log("Grumble successfully posted with ID:", data);
+          setGrumbles([...grumbles, { ...grumble, id: data }]);
         } else {
-          response.text().then((errorText) => {
-            console.error("Failed to post grumble. Error:", errorText);
-          });
+          console.error("Response data does not contain ID.");
         }
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   };
+  
 
   return (
     <>
