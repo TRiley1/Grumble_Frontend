@@ -9,7 +9,7 @@ const MessagePost = ({ onPost, username }) => {
 
 
   const handlePostMessage = () => {
-    // create a object identical to the grumble structure in home
+    
     const newGrumble = {
       "username" : username,
       "content" : grumble.content,

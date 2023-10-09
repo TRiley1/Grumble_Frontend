@@ -22,7 +22,6 @@ const Login = ({ onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Prepare the data to be sent in the POST request
     const data = {
       username: formData.username,
       password: formData.password,
@@ -38,17 +37,13 @@ const Login = ({ onLogin }) => {
       });
 
       if (response.ok) {
-        // Login successful
         const responseBody = await response.json();
         console.log(responseBody)
         const { accessToken } = responseBody;
 
-        // Call the onLogin function with the accessToken
         onLogin(accessToken, formData.username);
         navigate('/home')
-        
-        // You can now use this accessToken in your app's state or context
-        console.log('Login successful. access Token:', accessToken);
+    
       } else {
         // Login failed
         const errorResponse = await response.json();

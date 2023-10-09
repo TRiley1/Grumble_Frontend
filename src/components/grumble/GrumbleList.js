@@ -2,13 +2,16 @@ import Grumble from "./Grumble";
 import "./GrumbleList.css";
 import React, { useState, useEffect } from "react";
 
-const GrumbleList = ({ grumbles, authToken, username, userProfile }) => {
+const GrumbleList = ({ grumbles, authToken, username, setGrumbles }) => {
 
-  // console.log(`The card number is ${cardNumber}`)
+  // removes voted grumble
+  const removeGrumble = (id) => {
+    const updatedGrumbles = grumbleComponents.filter((el) => el.id !== id);
+    setGrumbles(updatedGrumbles);
+  };
 
 
-  // Need to filter out your own grumbles and grumbles you've liked or disliked already.
-
+  // filters voting grumble cards - filters pending approval and removes user interacted cards.
   const grumbleCards = (grumbles) => {
     const votingGrumbles = grumbles.filter(
       (el) =>
@@ -22,14 +25,14 @@ const GrumbleList = ({ grumbles, authToken, username, userProfile }) => {
         key={index}
         grumble={el}
         username={username}
-        userProfile={userProfile}
         authToken={authToken}
+        removeGrumble = {removeGrumble}
       />
     ));
   };
 
   const grumbleComponents = grumbleCards(grumbles);
-
+ 
   return (
     <div>
       {grumbleComponents.length > 0

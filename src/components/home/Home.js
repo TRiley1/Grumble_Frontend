@@ -11,13 +11,10 @@ const Home = ({ username, authToken }) => {
   const [grumbles, setGrumbles] = useState([]);
   const [userProfile, setUserProfile] = useState(null);
 
-  console.log(grumbles)
-
   useEffect(() => {
     getUserProfile();
     getGrumbles();
   }, []);
-
 
 
   const grumbleUrl = "http://localhost:8080/grumbles";
@@ -26,6 +23,8 @@ const Home = ({ username, authToken }) => {
 
   const accessToken = `Bearer ${authToken}`;
 
+
+  // fetchs user profile from db and sets it to username. 
   const getUserProfile = () => {
     fetch(userUrl, {
       method: "GET",
@@ -72,6 +71,7 @@ const Home = ({ username, authToken }) => {
     }
   };
 
+  // fetchs all grumbles from the db
   const getGrumbles = () => {
     fetch(grumbleUrl, {
       method: "GET",
@@ -88,6 +88,7 @@ const Home = ({ username, authToken }) => {
       });
   };
 
+  // onPost adds grumble to db and adds grumble plus res id to state
   const onPost = (grumble) => {
     fetch(addGrumbleUrl, {
       method: "POST",
@@ -137,10 +138,10 @@ const Home = ({ username, authToken }) => {
         </div>
         <div className="grumble-feed">
           <GrumbleList
-            userProfile = {userProfile}
             grumbles={grumbles}
             authToken={authToken}
             username={username}
+            setGrumbles = {setGrumbles}
           />
         </div>
       </div>

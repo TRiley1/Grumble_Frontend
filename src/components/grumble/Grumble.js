@@ -4,7 +4,7 @@ import ProfilePic from "../../icons/ProfilePic";
 import JudgementBar from "../judgementBar/JudgementBar";
 
 
-const Grumble = ({ grumble, authToken, username, userProfile }) => {
+const Grumble = ({ grumble, authToken, username, removeGrumble }) => {
 
   // console.log(grumble.id)
 
@@ -26,7 +26,7 @@ const Grumble = ({ grumble, authToken, username, userProfile }) => {
         handleVerdict("Invalid", grumble);
       }
     }
-  }, [likesCount, dislikesCount, grumble]);
+  }, [likesCount, dislikesCount]);
 
 
   const grumbleUser = grumble.user.userProfile.avatarConfig
@@ -123,6 +123,9 @@ const Grumble = ({ grumble, authToken, username, userProfile }) => {
           } else {
             setDislikesCount(prev => prev + 1);
           }
+
+          // I need to remove the grumble from state. 
+          removeGrumble(grumble.id)
           
         })
         .catch((error) => {
@@ -158,7 +161,7 @@ const Grumble = ({ grumble, authToken, username, userProfile }) => {
               {approvalImageRenderer(grumble)}
             </div>
             <hr />
-            <h2>Title : "This darn thing happened!"</h2>
+            <h2>{grumble.subject}</h2>
             <div className="speech-bubble">
               <p className="grumble-text">{grumble.grumble}</p>
             </div>
