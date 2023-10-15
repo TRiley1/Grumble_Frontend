@@ -8,7 +8,7 @@ const LikedGrumbles = ({userProfile, type}) => {
         likedGrumbles = userProfile?.likedGrumbles
     }
     else if (type === "your") {
-        likedGrumbles = userProfile.grumbles
+        likedGrumbles = userProfile?.grumbles
     }
     else {
         likedGrumbles = userProfile?.dislikedGrumbles
