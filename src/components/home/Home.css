@@ -49,3 +49,7 @@
         align-items: center;
     }
 }
+
+.grumble-liked {
+    background-color: #EB3937;
+}

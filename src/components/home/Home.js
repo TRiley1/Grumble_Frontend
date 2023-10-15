@@ -6,6 +6,7 @@ import Navbar from "../navbar/Navbar";
 import ProfilePic from "../../icons/ProfilePic";
 import Edit from "../../icons/Edit";
 import { Link } from "react-router-dom";
+import LikedGrumbles from "../likeGrumbles/LikedGrumbles";
 
 const Home = ({ username, authToken }) => {
   const [grumbles, setGrumbles] = useState([]);
@@ -140,9 +141,21 @@ const Home = ({ username, authToken }) => {
           <GrumbleList
             grumbles={grumbles}
             authToken={authToken}
-            username={username}
+            userProfile = {userProfile}
             setGrumbles = {setGrumbles}
           />
+        </div>
+        <h1>Liked Grumbles</h1>
+        <div className="grumble-liked">
+          <LikedGrumbles userProfile={userProfile} type = "like"/>
+        </div>
+        <h1>Disliked Grumbles</h1>
+        <div className="grumble-disliked">
+          <LikedGrumbles userProfile={userProfile} type = "dislike"/>
+        </div>
+        <h1>Your Grumbles</h1>
+        <div className="grumble-disliked">
+          <LikedGrumbles userProfile={userProfile} type = "your"/>
         </div>
       </div>
     </>
